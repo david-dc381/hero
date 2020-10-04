@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home/{name}', function($name){
-    return view('home', ['name' => $name]);
-})->where('name', '[A-Za-z]+');
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/heroes', 'HeroController@index')->name('admin.heroes');
+Route::get('/admin/items', 'ItemController@index')->name('admin.items');
+Route::get('/admin/enemies', 'EnemyController@index')->name('admin.enemies');
