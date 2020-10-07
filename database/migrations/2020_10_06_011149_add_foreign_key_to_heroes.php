@@ -14,9 +14,13 @@ class AddForeignKeyToHeroes extends Migration
     public function up()
     {
         Schema::table('heroes', function (Blueprint $table) {
-            $table->bigInteger('level_id')->unsigned();
+            $table->unsignedBigInteger('level_id');
 
             $table->foreign('level_id')->references('id')->on('levels');
+            
+            // $table->bigInteger('level_id')->unsigned();
+
+            // $table->foreign('level_id')->references('id')->on('levels');
         });
     }
 
