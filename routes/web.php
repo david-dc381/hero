@@ -19,7 +19,13 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin');
-    Route::get('heroes', 'HeroController@index')->name('admin.heroes');
+
+    Route::group(['prefix' => 'heroes'], function() {
+        Route::get('/', 'HeroController@index')->name('admin.heroes');
+        Route::get('create', 'HeroController@create')->name('admin.heroes.create');
+        Route::post('store', 'HeroController@store')->name('admin.heroes.store');
+    });
+
     Route::get('items', 'ItemController@index')->name('admin.items');
     Route::get('enemies', 'EnemyController@index')->name('admin.enemies');
 });
