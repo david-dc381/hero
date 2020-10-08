@@ -35,7 +35,7 @@
                         <td>{{ $hero -> coins }}</td>
                         <td>{{ $hero -> experience }}</td>
                         <td>
-                            <a href="{{ route('admin.heroes') }}" class="btn btn-warning text-white">Modificar</a>
+                            <a href="{{ route('admin.heroes.edit', ['id' => $hero->id]) }}" class="btn btn-warning text-white">Modificar</a>
                             <a href="{{ route('admin.heroes') }}" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>

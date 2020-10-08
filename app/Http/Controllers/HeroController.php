@@ -17,7 +17,24 @@ class HeroController extends Controller
     }
 
     public function store(Request $request) {
-        $hero = new Heroe();
+        return $this->saveHero($request, null);
+    }
+
+    public function update(Request $request, $id) {
+        return $this->saveHero($request, $id);
+    }
+
+    // Creamos una función para registro y para la actulización de datos
+    public function saveHero(Request $request, $id) {
+
+        if ($id) {
+            $hero = Heroe::find($id);
+        } else {
+            $hero = new Heroe();
+
+            $hero->experience = 0;
+            $hero->level_id   = 1;
+        }
 
         $hero->name       = $request->input('name');
         $hero->hp         = $request->input('hp');
@@ -25,11 +42,14 @@ class HeroController extends Controller
         $hero->defense    = $request->input('defense');
         $hero->luck       = $request->input('luck');
         $hero->coins      = $request->input('coins');
-        $hero->experience = 0;
-        $hero->level_id   = 1;
-
+        
         $hero->save();
         return redirect()->route('admin.heroes');
+    }
 
+    public function edit($id) {
+        $hero = Heroe::find($id);
+
+        return view('admin.heroes.edit', ['hero' => $hero]);
     }
 }
