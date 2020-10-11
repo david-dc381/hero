@@ -1,10 +1,11 @@
 @extends ('layouts.app')
 
 @section('content')
-<h1>Editar Heroe</h1>
+<h1>Editar Heroe - {{ $hero->name }}</h1>
 
-<form action="{{ route('admin.heroes.update', ['id' => $hero->id]) }}" method="POST">
+<form action="{{ route('heroes.update', ['id' => $hero->id]) }}" method="POST">
   @csrf
+  @method('PUT')
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" id="name" name="name" value="{{ $hero->name }}" placeholder="Ingrese un nombre" require>

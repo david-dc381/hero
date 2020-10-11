@@ -44,7 +44,7 @@ class HeroController extends Controller
         $hero->coins      = $request->input('coins');
         
         $hero->save();
-        return redirect()->route('admin.heroes');
+        return redirect()->route('heroes.index');
     }
 
     public function edit($id) {
@@ -56,6 +56,6 @@ class HeroController extends Controller
     public function destroy($id) {
         $hero = Heroe::find($id);
         $hero->delete();
-        return redirect()->route('admin.heroes');
+        return redirect()->route('heroes.index');
     }
 }
