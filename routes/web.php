@@ -22,4 +22,5 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('heroes', 'HeroController')->parameters(['heroes'=>'id']);
     Route::resource('item', 'ItemController')->parameters(['item' => 'id']);
     Route::resource('enemy', 'EnemyController')->parameters(['enemy' => 'id']);
+    Route::get('bs', 'BSController@index')->name('admin.bs');
 });
