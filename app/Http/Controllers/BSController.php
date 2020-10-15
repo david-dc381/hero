@@ -9,20 +9,20 @@ use App\Enemy;
 class BSController extends Controller
 {
     public function index () {
-        dd($this->runManualBattle(13,5));
-        return view('admin.bs.index', $this->runAutoBattle(13,5));
+        // dd($this->runManualBattle(13,5));
+        return view('admin.bs.index', $this->runAutoBattle(15,7));
     }
 
     public function runAutoBattle($heroId, $enemyId) {
-        $hero  = Heroe::find(13)->first();
-        $enemy = Enemy::find(5)->first();
+        $hero  = Heroe::find(15)->first();
+        $enemy = Enemy::find(7)->first();
 
         $events = [];
 
         while ($hero->hp > 0 && $enemy->hp > 0) {
             $luck = random_int(0, 100);
 
-            if ($luck >= 50) {
+            if ($luck >= $hero->luck) {
                 $hp = $enemy->defense - $hero->attack;
 
                 if ($hp < 0) {
@@ -73,9 +73,11 @@ class BSController extends Controller
         }
 
         return [
-            'events'    =>$events,
-            'heroName'  => $hero->name,
-            'enemyName' => $enemy->name
+            'events'      =>$events,
+            'heroName'    => $hero->name,
+            'enemyName'   => $enemy->name,
+            'heroAvatar'  => $hero->img_path,
+            'enemyAvatar' => $enemy->img_path
         ];
         
     }
@@ -86,7 +88,7 @@ class BSController extends Controller
 
         $luck = random_int(0, 100);
 
-            if ($luck >= 50) {
+            if ($luck >= $hero->luck) {
                 $hp = $enemy->defense - $hero->attack;
 
                 if ($hp < 0) {

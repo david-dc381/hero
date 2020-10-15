@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use App\Enemy;
 
 class EnemyController extends Controller
@@ -83,6 +85,9 @@ class EnemyController extends Controller
     public function destroy($id)
     {
         $enemy = Enemy::find($id);
+        $filePath = public_path() . '/images/enemies/' . $enemy->img_path;
+        // '\File::'
+        \File::delete($filePath);
         $enemy->delete();
         return redirect()->route('enemy.index');
     }
@@ -102,6 +107,13 @@ class EnemyController extends Controller
         $enemy->defense    = $request->input('defense');
         $enemy->coins      = $request->input('coins');
         $enemy->experience = $request->input('experience');
+
+        if ($request->hasFile('img_path')) {
+            $file = $request->file('img_path');
+            $name = time() . "_" .$file->getClientOriginalName();
+            $file->move(public_path() . '/images/enemies', $name);
+            $enemy->img_path = $name;
+        }
 
         $enemy->save();
         return redirect()->route('enemy.index');

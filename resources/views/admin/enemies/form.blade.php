@@ -29,3 +29,8 @@
     <label for="experience">Experiencia</label>
     <input type="number" class="form-control" id="experience" name="experience" @isset($enemy) value="{{ $enemy->experience }}" @endisset placeholder="Ingrese los puntos de suerte" require>
   </div>
+
+  <div class="from-group">
+    <label for="img_path">Imagen</label>
+    <input type="file" name="img_path" id="img_path">
+  </div>
